@@ -1,3 +1,16 @@
+/* label {
+    margin-top:10px; 
+} */
+input {
+    margin-bottom: 10px;
+}
+h5 {
+    margin: 0  auto;
+}
+.close {
+    margin-left: 0px !important;
+    padding-left: 5px;
+}
 a{
     color: aliceblue
 }
@@ -14,13 +27,19 @@ a:active{
     height: 50px !important;
     cursor:pointer;
 }
-#layer-left {
+#layer-left{
     position: absolute;
     width: 200px;
     height: 500px;
     display: none;
     margin-top: 66px;
     z-index:9999;
+}
+.search{
+    width: 100px !important;
+}
+.form-control {
+    margin-top: 10px;
 }
 .list-group-item-light{
     background: #343A40;
@@ -53,4 +72,49 @@ a:active{
 }
 .card-body {
     height: 200px;
+}
+.btn-left {
+    margin-left: 10px;
+}
+.modal-title{
+    text-align: center !important;
+}
+.modal-content{
+    width: 400px;
+    height: 453px;
+}
+.modal-body {
+    flex: 0.3 1 auto;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+.btn {
+    line-height: 1.8em;
+    width: 300px;
+    margin: 0 auto;
+    margin-bottom: 2em;
+}
+.login_a {
+    text-align: center;
+}
+.login_a a{
+    color: deepskyblue;
+}
+.login_a a:hover{
+    color: #0069D9;
+}
+.modal-footer {
+    margin-top: 10px;
+    justify-content: center;
+}
+/* #login {
+    display: block;
+} */
+#registered{
+    display: none;
+}
+.registered {
+    height: 610px;
 }
