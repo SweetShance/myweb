@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ file_type }}{% endblock %}
+{% block file_type %} active {% endblock %}
+{% block content %}
+    <div class="row files-title">
+      <div class="col-">
+          <div class="file-list">
+            {% for file in files_all %}
+                {% comment %} <iframe src="" ></iframe> {% endcomment %}
+                <div class="card" style="width: 15rem;">
+                        <img class="card-img-top" src="{{ MEDIA_URL }}{{ file.icon }}" alt="Card image cap">
+                        <div class="card-body">
+                            <a href="{% url 'upload_files:showFile' file.pk %}"><h5 class="card-title">{{ file.title }}</h5></a>
+                            <p class="card-text">{{ file.introduction | truncatechars:30 }}</p>
+                        </div>
+                      </div>
+                
+             {% endfor %}
+          </div>
+      </div>
+    </div>
+<div>
+
+{% endblock  %}

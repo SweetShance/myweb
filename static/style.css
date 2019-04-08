@@ -1,0 +1,56 @@
+a{
+    color: aliceblue
+}
+a:hover{
+    text-decoration-line: none;
+    color: black;
+}
+a:active{
+    color: black;
+}
+
+#flip {
+    width: 50px !important;
+    height: 50px !important;
+    cursor:pointer;
+}
+#layer-left {
+    position: absolute;
+    width: 200px;
+    height: 500px;
+    display: none;
+    margin-top: 66px;
+    z-index:9999;
+}
+.list-group-item-light{
+    background: #343A40;
+    
+}
+.list-group-item:first-child {
+   border-radius: 0px; 
+}
+.top-ul li {
+    margin-left: 20px;
+}
+.files-title a{
+    color: dimgrey;
+    text-align: center;
+}
+.files-title p{
+    text-align: center;
+}
+.files-title a:hover{
+    color: black;
+}
+.files-title img{
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+.card {
+    float: left;
+    margin-left: 3px;
+}
+.card-body {
+    height: 200px;
+}

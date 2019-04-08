@@ -7,4 +7,6 @@ admin.site.register(FileLabel)
 
 @admin.register(UploadFiles)
 class UploadFilesAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'fileType', 'auth')
+    list_display = ('id', 'title', 'fileType', 'auth', )
+    list_filter = ('title', 'fileType')
+    search_fields = ['title']

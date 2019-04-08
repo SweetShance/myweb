@@ -20,11 +20,12 @@ class FileLabel(models.Model):
 class UploadFiles(models.Model):
     title = models.CharField(max_length=100)
     introduction = models.TextField(max_length=500) #简介
-    fileType = models.ForeignKey(FileType, on_delete=models.DO_NOTHING)
+    fileType = models.ForeignKey(FileType, on_delete=models.DO_NOTHING, )
     auth = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     content = models.FileField(upload_to='files') # 内容
     fileLabel = models.ManyToManyField(FileLabel, through='Associated')
     create_time = models.DateField(default=timezone.now)
+    icon = models.ImageField(upload_to='files', blank=True)
     
     def __str__(self):
         return "<id: %s name: %s>" %(self.pk, self.title)
