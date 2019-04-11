@@ -8,6 +8,7 @@
     <title>{% block title %}首页{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'bootstrap-4.2.1-dist/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="{% static 'echarts.min.js' %}"></script>
 </head>
 <body>
   <!-- 左边用户操作 start -->
@@ -17,8 +18,8 @@
             <li class="list-group-item list-group-item-light ">{{ user }} 你好</li>
             <li class="list-group-item list-group-item-light"><a href="">用户信息</a></li>  
             <li class="list-group-item list-group-item-light"><a href="">资源管理</a></li>
-            <li class="list-group-item list-group-item-light"><a href="">上传文件</a></li>
-            <li class="list-group-item list-group-item-light"><a href="">退出登录</a></li>
+            <li class="list-group-item list-group-item-light"><a href="{% url 'upload_files:upload' %}">上传文件</a></li>
+            <li class="list-group-item list-group-item-light"><a href="{% url 'logout' %}">退出登录</a></li>
           {% else %}  
           <li class="list-group-item list-group-item-light ">暂未登录</li>
           <li class="list-group-item list-group-item-light "><a data-toggle="modal" data-target="#exampleModalCenter" href="" onclick="showhidediv('layer-left')">登录/注册</a></li>
@@ -124,8 +125,6 @@
           
         var js_login = document.getElementById('login')
         var js_registered = document.getElementById('registered')
-
-       
         if(sbtitle){
            if(sbtitle.style.display=='block'){
            sbtitle.style.display='none';
@@ -136,8 +135,7 @@
               }
               if(id=='login'){
                   js_registered.style.display='none';
-              }
-              
+              } 
            }
         }
         }
@@ -152,7 +150,6 @@
         // }
         // }
         // }
-
       </script>
     
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

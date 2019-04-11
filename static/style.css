@@ -7,6 +7,9 @@ input {
 h5 {
     margin: 0  auto;
 }
+ul {
+    list-style: none;
+}
 .close {
     margin-left: 0px !important;
     padding-left: 5px;
@@ -118,3 +121,10 @@ a:active{
 .registered {
     height: 610px;
 }
+
+label{
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+/* 上传按钮 */
+

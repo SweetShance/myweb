@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.contrib import auth
 from django.contrib.auth.models import User
 from .forms import LoginForm, RegisterForm
+from .utils import statistical
 
 
-def index(request):
+def login_utils(request):
     # 注册
     if request.method == "POST":
         registerform = RegisterForm(request.POST)
@@ -20,7 +22,7 @@ def index(request):
             auth.login(request, user)
     #登录
     if request.method == "POST":
-        # 接收数据
+        #接收数据
         loginform = LoginForm(request.POST)
         if loginform.is_valid():
             user = loginform.cleaned_data["user"]
@@ -32,4 +34,18 @@ def index(request):
         "loginform": loginform,
         "registerform": registerform,
     }
-    return render(request, 'base.html', context)
+    return context
+
+def logout_view(request):
+    urlform = request.META.get('HTTP_REFERER', reverse('index'))
+    auth.logout(request)
+    return redirect(urlform)
+
+def index(request):
+    context = login_utils(request)
+
+    st_context = statistical(request)
+    for key, value in st_context.items():
+        context[key] = value
+    return render(request, 'index.html', context)
+
