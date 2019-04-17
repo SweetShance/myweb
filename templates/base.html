@@ -63,11 +63,10 @@
       <!-- 导航栏 end -->
 
 
-
 <!-- 登录  注册-->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
  <!-- 模态框 登录 start -->
-  <form action="" method="post" id="login">
+  <form action="{% url 'index' %}?form=login" method="post" id="login">
   {% csrf_token %}
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content" >
@@ -78,7 +77,12 @@
           </button>
         </div>
         <div class="modal-body">
-          {{ loginform }}
+          {% for field in loginform %}
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+          {% endfor %}
+          <span class='pull-left text-danger'>{{ loginform.non_field_errors }}</span>
+          <!-- {{ loginform }} -->
         </div>
         <input type="submit" class="btn btn-primary" value="登录">
         <!-- javascript:void(0); 让地址不进行跳转 -->
@@ -91,70 +95,97 @@
   </form>
   <!-- 模态框 登录 end -->
   <!-- 模态框 注册 start -->
-<form action="" method="post" id="registered">
-  {% csrf_token %}
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content registered" >
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Welcome</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          {{ registerform }}
-        </div>
-        <input type="submit" class="btn btn-primary" value="注册">
-        <!-- javascript:void(0); 让地址不进行跳转 -->
-        <!-- <span class="login_a">其他登录方式-><a href="javascript:void(0);">微信</a>. <a href="javascript:void(0);">QQ</a></span> -->
-        <div class="modal-footer">
-            <h5><span class="login_a">已有账号<a href="javascript:void(0);" onclick="showhidediv('login')">登录</a></span></h5> 
+ <!-- {{ equest.session.login }} -->
+  <form action="{% url 'index' %}?form=register" method="post" id="registered">
+    {% csrf_token %}
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content registered" >
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Welcome</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            {% for field in registerform %}
+              <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+              {{ field }}
+              <p class='pull-left text-danger'>{{ field.errors.as_text }}</p>    
+            {% endfor %}
+            <span class='pull-left text-danger'>{{ loginform.non_field_errors }}</span>
+            <!-- {{ registerform }} -->
+          </div>
+          <input type="submit" class="btn btn-primary" value="注册">
+          <!-- javascript:void(0); 让地址不进行跳转 -->
+          <!-- <span class="login_a">其他登录方式-><a href="javascript:void(0);">微信</a>. <a href="javascript:void(0);">QQ</a></span> -->
+          <div class="modal-footer">
+              <h5><span class="login_a">已有账号<a href="javascript:void(0);" onclick="showhidediv('login')">登录</a></span></h5> 
+          </div>
         </div>
       </div>
-    </div>
-  </form>
-  <!-- 模态框 注册 end -->
+    </form>
+    <!-- 模态框 注册 end -->
 </div>
+
       <!-- List group -->
       {% block content %} {% endblock %}
      <!-- Optional JavaScript -->
-     <script>
-        //创建一个showhidediv的方法，直接跟ID属性
-        function showhidediv(id){
-        var sbtitle=document.getElementById(id);
-          
-        var js_login = document.getElementById('login')
-        var js_registered = document.getElementById('registered')
-        if(sbtitle){
-           if(sbtitle.style.display=='block'){
-           sbtitle.style.display='none';
-           }else{
-           sbtitle.style.display='block';
-              if(id=='registered'){
-                js_login.style.display='none';
-              }
-              if(id=='login'){
-                  js_registered.style.display='none';
-              } 
-           }
-        }
-        }
 
-        // function changeColor(num){
-        // for(var i=1;i<=5;i++){
-        // var str = document.getElementById('sub_'+i);
-        // if(i==num){
-        // str.className="active";
-        // }else{
-        // str.className="";
-        // }
-        // }
-        // }
-      </script>
-    
+     
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="{% static 'bootstrap-4.2.1-dist/js/jquery-3.3.1.slim.min.js' %}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="{% static 'bootstrap-4.2.1-dist/js/popper.min.js' %}" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="{% static 'bootstrap-4.2.1-dist/js/bootstrap.min.js' %}" crossorigin="anonymous"></script>
-</body>
+    <script src="{% static 'js/login.js' %}"></script>
+    <script>
+        //创建一个showhidediv的方法，直接跟ID属性
+//         function showhidediv(id){
+//         var sbtitle=document.getElementById(id);
+          
+//         var js_login = document.getElementById('login')
+//         var js_registered = document.getElementById('registered')
+//         if(sbtitle){
+//             if(sbtitle.style.display=='block'){
+//             sbtitle.style.display='none';
+//             }else{
+//             sbtitle.style.display='block';
+//               if(id=='registered'){
+//                 js_login.style.display='none';
+//               }
+//               if(id=='login'){
+//                   js_registered.style.display='none';
+//               } 
+//             }
+//         }
+//       }
+
+//       　//paraName 等找参数的名称
+// 　　function GetUrlParam(paraName) {
+// 　　　　var url = document.location.toString();
+// 　　　　var arrObj = url.split("?");
+
+// 　　　　if (arrObj.length > 1) {
+// 　　　　　　var arrPara = arrObj[1].split("&");
+// 　　　　　　var arr;
+
+// 　　　　　　for (var i = 0; i < arrPara.length; i++) {
+// 　　　　　　　　arr = arrPara[i].split("=");
+
+// 　　　　　　　　if (arr != null && arr[0] == paraName) {
+// 　　　　　　　　　　return arr[1];
+// 　　　　　　　　}
+// 　　　　　　}
+// 　　　　　　return "";
+// 　　　　}
+// 　　　　else {
+// 　　　　　　return "";
+// 　　　　}
+// 　　}
+
+// 　　if(GetUrlParam("form")=="login"){
+//         $('#exampleModalCenter').modal('show')
+//     }
+      
+    </script>
+  </body>
 </html>

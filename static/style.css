@@ -10,6 +10,9 @@ h5 {
 ul {
     list-style: none;
 }
+.list_left {
+    margin-left: 50px ;
+}
 .close {
     margin-left: 0px !important;
     padding-left: 5px;
@@ -54,6 +57,9 @@ a:active{
 .top-ul li {
     margin-left: 20px;
 }
+.file-list .card {
+    width: 13rem !important;
+}
 .files-title a{
     color: dimgrey;
     text-align: center;
@@ -90,14 +96,20 @@ a:active{
     flex: 0.3 1 auto;
     padding-left: 2em;
     padding-right: 2em;
-    padding-top: 1rem;
-    padding-bottom: 2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0rem;
+}
+p {
+    margin-bottom: 0em;
+}
+.pull-left ul{
+    margin-bottom: 0px;
 }
 .btn {
     line-height: 1.8em;
     width: 300px;
     margin: 0 auto;
-    margin-bottom: 2em;
+    margin-bottom: 0em;
 }
 .login_a {
     text-align: center;

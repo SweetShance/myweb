@@ -5,7 +5,7 @@
 {% block content %}
 <div>
     <div class="row">
-      <div class="col-md-2">
+      <div class="col-md-1 list_left">
       </div>
       <div class="col-md-10">
           <div class="files-title">
@@ -20,12 +20,14 @@
                             <p class="card-text">{{ file.introduction | truncatechars:30 }}</p>
                         </div>
                     </div>
-                    
-                 {% endfor %}
+                {% endfor %}
               </div>
         </div>
       </div>
+      <div class="col-md-1">
+      </div>
   </div>
+</div>
     <!-- <div class="files-title">
           <div class="file-list">
             {% for file in files_all %}
