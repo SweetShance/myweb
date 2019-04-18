@@ -1,5 +1,30 @@
 {% extends 'base.html' %}
 
+{% load static %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'video-js.min.css' %}">
+<script src="{% static 'js/video.min.js' %}"></script>
+{% endblock %}
 {% block content %}
-    <iframe src="{{ MEDIA_URL }}{{ file.content }}" width="100%" height="500"></iframe>
+<!-- 内容展示 start -->
+<div class="container void">
+    {% if type %}
+        <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none" width="640" height="264"
+                poster="{{ MEDIA_URL }}{{ file.icon }}"  data-setup='{"example_option":true}'>
+            <source src="{{ MEDIA_URL }}{{ file.content }}" type="video/mp4">
+        </video>
+    {% else %}
+        <iframe src="{{ MEDIA_URL }}{{ file.content }}" width="100%" height="920"></iframe>
+    {% endif %}
+</div>
+<!-- 内容展示 end -->
+
+<!-- 评论 start -->
+
+<!-- 评论 end -->
 {% endblock content %}
+{% block script %} 
+<script>
+
+</script>
+{% endblock %}

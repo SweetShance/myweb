@@ -1,20 +1,40 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.urls import reverse
+from django.utils import timezone
+from django.core.paginator import Paginator
 from .models import UploadFiles, FileType, FileLabel, Associated
 from filesManage.views import login_utils
 from .forms import UploadForms
-from django.utils import timezone
 
 # Create your views here.
-def filesList(request):
+def pageList(request):
+    context = {}
     request_get = request.GET.get("a")
+    page_num = request.GET.get('page', 1) # 获取页码参数页码请求
     # 从request接收的有两个单引号
     file_type = FileType.objects.get(fileType=request_get)
     files_all = UploadFiles.objects.filter(fileType=file_type.pk)
+    paginator = Paginator(files_all, 15)
+
+    # page = request.GET.get('page')
+    page_of_files = paginator.get_page(page_num) # 获取页面
+    context['a'] = request_get
+    context["pages"] = paginator.page_range
+    context["page_of_files"] = page_of_files
+    return context
+
+
+def filesList(request):
+    # request_get = request.GET.get("a")
+    # # 从request接收的有两个单引号
+    # file_type = FileType.objects.get(fileType=request_get)
+    # files_all = UploadFiles.objects.filter(fileType=file_type.pk)
+    
     template_name = 'upload_files/show_files_about_type.html'
     context = login_utils(request)
-    context["files_all"] = files_all
+    # context["files_all"] = files_all
+    context = pageList(request)
     return render(request, template_name=template_name, context=context)
     # response = render(request, template_name=template_name, context=context)
 
@@ -22,6 +42,8 @@ def showFile(request, pk):
     file =  get_object_or_404(UploadFiles, pk=pk)
     context = login_utils(request)
     context['file'] = file
+    print(str(file.fileType) == "文件")
+    context['type'] = str(file.fileType) == "视频"
     return render(request, 'upload_files/show_content.html', context=context)
 
 def uploadFiles(request):

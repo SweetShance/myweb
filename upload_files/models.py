@@ -29,6 +29,10 @@ class UploadFiles(models.Model):
     
     def __str__(self):
         return "<id: %s name: %s>" %(self.pk, self.title)
+
+    class Meta:
+        ordering = ['-create_time']    
+
 def FileFieldDefault():
     return FileLabel.objects.all().first
 

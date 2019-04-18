@@ -1,6 +1,3 @@
-/* label {
-    margin-top:10px; 
-} */
 input {
     margin-bottom: 10px;
 }
@@ -139,4 +136,53 @@ label{
     margin-bottom: 0px;
 }
 /* 上传按钮 */
+/* 面板 */
+#ul {
+    position: relative;
+    display: table;
+    margin: 0 auto;
+    text-align: center;
+}
+#ul li{
+    list-style: none;
+    margin-top: 10px;
+    float: left;
+
+}
+
+/* void */
+.void {
+    margin-top: 20px;
+}
+.video-js .vjs-big-play-button{
+    font-size: 2.5em !important;
+    line-height: 2.3em !important;
+    height: 2.5em !important;
+    width: 2.5em !important;
+    -webkit-border-radius: 2.5em !important;
+    -moz-border-radius: 2.5em !important;
+    border-radius: 2.5em;
+    background-color: #73859f;
+    background-color: rgba(115,133,159,.5);
+    border-width: 0.15em;
+    margin-top: -1.25em;
+    margin-left: -1.75em;
+}
+/* 中间的播放箭头 */
+.vjs-big-play-button .vjs-icon-placeholder {
+    font-size: 1.63em !important;
+}
+/* 加载圆圈 */
+.vjs-loading-spinner {
+    font-size: 2.5em;
+    width: 2em;
+    height: 2em;
+    border-radius: 1em;
+    margin-top: -1em;
+    margin-left: -1.5em;
+}
+.vjs-paused .vjs-big-play-button,
+.vjs-paused.vjs-has-started .vjs-big-play-button {
+    display: block;
+}
 

@@ -3,45 +3,57 @@
 {% block title %}{{ file_type }}{% endblock %}
 {% block file_type %} active {% endblock %}
 {% block content %}
-<div>
-    <div class="row">
-      <div class="col-md-1 list_left">
-      </div>
-      <div class="col-md-10">
-          <div class="files-title">
-              <div class="file-list">
-                {% for file in files_all %}
-                    {% comment %} <iframe src="" ></iframe> {% endcomment %}
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">头部</div>
+        <div class="files-title">
+            <div class="file-list">
+                {% for file in page_of_files.object_list %}
                     <div class="card" style="width: 15rem;">
                         <img class="card-img-top" src="{{ MEDIA_URL }}{{ file.icon }}" alt="Card image cap">
                         <div class="card-body">
-                            <span> {{ file.fileLabel }} </span>
+                            <span> {{ file.create_time }} </span>
                             <a href="{% url 'upload_files:showFile' file.pk %}"><h5 class="card-title">{{ file.title }}</h5></a>
                             <p class="card-text">{{ file.introduction | truncatechars:30 }}</p>
                         </div>
                     </div>
                 {% endfor %}
-              </div>
+            </div>
         </div>
-      </div>
-      <div class="col-md-1">
-      </div>
-  </div>
-</div>
-    <!-- <div class="files-title">
-          <div class="file-list">
-            {% for file in files_all %}
-                {% comment %} <iframe src="" ></iframe> {% endcomment %}
-                <div class="card" style="width: 15rem;">
-                        <img class="card-img-top" src="{{ MEDIA_URL }}{{ file.icon }}" alt="Card image cap">
-                        <div class="card-body">
-                            <a href="{% url 'upload_files:showFile' file.pk %}"><h5 class="card-title">{{ file.title }}</h5></a>
-                            <p class="card-text">{{ file.introduction | truncatechars:30 }}</p>
-                        </div>
-                      </div>
+        <div class="card-footer">
+        <nav aria-label="Page navigation example">
+            
+            <ul class="pagination" id="ul">
+            {% if page_of_files.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'upload_files:showfiles' %}?a={{ a }}&page={{ page_of_files.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+            {% endif %}
+                {% for page in pages %}
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'upload_files:showfiles' %}?a={{ a }}&page={{ page }}">{{ page }}</a>
+                </li>
+                {% empty %}
+                    暂无内容
+                {% endfor %}
+                {% if page_of_files.has_next %}
+                <li>
+                    <a class="page-link" href="{% url 'upload_files:showfiles' %}?a={{ a }}&page={{ page_of_files.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span></a>
+                </li>
+                {% endif %}
                 
-             {% endfor %}
-          </div>
-    </div> -->
+                </li>
+            </ul>
+        </nav>  
+        </div>
+    </div>
+</div>
+
 
 {% endblock  %}
