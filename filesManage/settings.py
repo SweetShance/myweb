@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'upload_files',
     'comments',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -124,7 +125,23 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-
+CKEDITOR_CONFIGS = {
+    'comment_ckeditor': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript'],
+            ['TextColor', 'BGColor', 'RemoveFormat'],
+            ['Link', 'Unlink'],
+            ['Smiley', 'SpecialChar', 'Blockquote'],
+            ['NumberedList', 'BulletedList']
+        ],
+        'width': 'auto',
+        'height': '190',
+        'tabSpaces': 4,
+        'removePlugins': 'elementspath',
+        'resize_enabled': False,
+    }
+}
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [

@@ -4,27 +4,60 @@
 {% block link %}
 <link rel="stylesheet" href="{% static 'video-js.min.css' %}">
 <script src="{% static 'js/video.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+
 {% endblock %}
 {% block content %}
 <!-- 内容展示 start -->
 <div class="container void">
     {% if type %}
-        <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none" width="640" height="264"
+        <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none" width="1100px;" height="800px;"
                 poster="{{ MEDIA_URL }}{{ file.icon }}"  data-setup='{"example_option":true}'>
             <source src="{{ MEDIA_URL }}{{ file.content }}" type="video/mp4">
         </video>
     {% else %}
         <iframe src="{{ MEDIA_URL }}{{ file.content }}" width="100%" height="920"></iframe>
     {% endif %}
-</div>
+
 <!-- 内容展示 end -->
 
 <!-- 评论 start -->
+    <div class="comment">
+        <div class="comment_up">
+            <p>评论</p>
+            <form action="{% url 'comments:save_comment' %}" method="post" class="comment_form">
+            {% csrf_token %}
+                {% if user.is_authenticated %}
+                <span class="comment_top"><b class="username"> {{ user.username }}</b> 你好～ </span>
+                    {% for field in commentForm %}
+                        {{ field }}
+                    {% endfor %}
+                    <input type="submit" class="btn btn-primary" value="发送">
+                {% else %}
+                    暂未登录请 登录 
+                {% endif %}
+            </form>
+        </div>
+        <div class="comment_show">
+            {% for comment in comments %}
+            <div class="show">
+                <div class="user"><b>{{ comment.auth }}</b></div>
+                <div class="comment_content"><span>{{ comment.content |striptags }}</span></div>
+                <div class="about">{{ comment.create_time }}
+                        {% ifequal comment.auth  request.user  %}
+                            <a href="{% url 'comments:del_comment' comment.pk %}" class="del">删除评论</a>               
+                        {% endifequal %}
+                </div>
+            </div>
+            {% empty %}
+                暂无评论
+            {% endfor %}
+        </div>
+    </div>  
+</div>
 
 <!-- 评论 end -->
 {% endblock content %}
 {% block script %} 
-<script>
-
-</script>
 {% endblock %}

@@ -5,13 +5,13 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 
 # Create your models here.
 class Comments(models.Model):
-    content = models.TextField(max_length=200)
+    content = models.TextField("评论内容", max_length=200)
     create_time = models.DateTimeField(auto_now_add=True)
-    auth = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    file_type = models.ForeignKey(ContentType, on_delete=models.DO_NOTHING)
-    file_id = models.PositiveIntegerField()
+    auth = models.ForeignKey(User, verbose_name="评论用户", on_delete=models.DO_NOTHING)
+    content_type = models.ForeignKey( ContentType, verbose_name="绑定的对象", on_delete=models.DO_NOTHING)
+    object_id = models.PositiveIntegerField("评论对象的id")
     content_object = GenericForeignKey('content_type', 'object_id')
 
     def __str__(self):
-        return "user:%s id: %s" %(self.auth, self.file_id)
+        return "user:%s id: %s" %(self.auth, self.object_id)
 

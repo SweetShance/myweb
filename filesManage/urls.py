@@ -23,5 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
     path('files/', include('upload_files.urls')),
-    path('logout/', logout_view, name="logout")
+    path('logout/', logout_view, name="logout"),
+    path('comment/', include('comments.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

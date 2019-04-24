@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}{{ file_type }}{% endblock %}
 {% block file_type %} active {% endblock %}
 {% block content %}
 
 <div class="container">
-    <div class="card">
+    <div class="card card_all">
         <div class="card-header">头部</div>
         <div class="files-title">
             <div class="file-list">
@@ -13,11 +13,13 @@
                     <div class="card" style="width: 15rem;">
                         <img class="card-img-top" src="{{ MEDIA_URL }}{{ file.icon }}" alt="Card image cap">
                         <div class="card-body">
-                            <span> {{ file.create_time }} </span>
                             <a href="{% url 'upload_files:showFile' file.pk %}"><h5 class="card-title">{{ file.title }}</h5></a>
                             <p class="card-text">{{ file.introduction | truncatechars:30 }}</p>
                         </div>
+                        <p class="file_list_time"><img src="{% static 'img/time.png' %}" >{{ file.create_time }} <a href="{% url 'upload_files:download' file.pk %}">&nbsp; <img src="{% static 'img/下载.png' %}" alt=""></a> </p>
                     </div>
+                {% empty %}
+                    暂无内容
                 {% endfor %}
             </div>
         </div>

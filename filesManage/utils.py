@@ -7,5 +7,4 @@ def statistical(request):
     for fileType in fielTypes:
         file_count_about_type = UploadFiles.objects.filter(fileType=fileType.pk).count()
         context[fileType.fileType] = file_count_about_type
-    
     return context

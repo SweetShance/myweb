@@ -16,13 +16,16 @@
     <div id="layer-left">
         <ul class="list-group bg-ul" >
           {% if user.is_authenticated %} 
-            <li class="list-group-item list-group-item-light ">{{ user }} 你好</li>
-            <li class="list-group-item list-group-item-light"><a href="">用户信息</a></li>  
-            <li class="list-group-item list-group-item-light"><a href="">资源管理</a></li>
+            <li class="list-group-item list-group-item-light "> <span style="margin-left: 24px">{{ user }}你好</span> </li>
+            <li class="list-group-item list-group-item-light" ><a href="">用户信息</a></li>  
+            <li class="list-group-item list-group-item-light"><a href="{% url 'upload_files:manage' %}">资源管理</a></li>
+            {% if user.is_superuser %}
+            <li class="list-group-item list-group-item-light"><a href="{% url 'upload_files:chick' %}">文件审核</a></li>
+            {% endif %}
             <li class="list-group-item list-group-item-light"><a href="{% url 'upload_files:upload' %}">上传文件</a></li>
             <li class="list-group-item list-group-item-light"><a href="{% url 'logout' %}">退出登录</a></li>
           {% else %}  
-          <li class="list-group-item list-group-item-light ">暂未登录</li>
+          <li class="list-group-item list-group-item-light " > <span style="margin-left: 31px">暂未登录</span> </li>
           <li class="list-group-item list-group-item-light "><a data-toggle="modal" data-target="#exampleModalCenter" href="" onclick="showhidediv('layer-left')">登录/注册</a></li>
           {% endif %}  
       </ul>
@@ -38,26 +41,26 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto top-ul">
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'index' %}">首页<span class="sr-only"></span></a>
+              <a class="nav-link " href="{% url 'index' %}?b=index">首页<span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'upload_files:showfiles' %}?a=文件">文件</a>
+              <a class="nav-link" href="{% url 'upload_files:showfiles' %}?a=文件" target="iframe_a">文件</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'upload_files:showfiles' %}?a=图片">图片</a>
+              <a class="nav-link" href="{% url 'upload_files:showfiles' %}?a=图片" target="iframe_a">图片</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'upload_files:showfiles' %}?a=音乐">音乐</a>
+              <a class="nav-link" href="{% url 'upload_files:showfiles' %}?a=音乐" target="iframe_a">音乐</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'upload_files:showfiles' %}?a=视频">视频</a>
+              <a class="nav-link" href="{% url 'upload_files:showfiles' %}?a=视频" target="iframe_a">视频</a>
             </li>
           </ul>
           <!-- 搜索框 start -->
-          <form class="form-inline my-2 my-lg-0">
+          <!-- <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0 search" type="submit">Search</button>
-          </form>
+          </form> -->
           <!-- 搜索框 end -->
         </div>
       </nav>
@@ -138,6 +141,28 @@
     <script src="{% static 'bootstrap-4.2.1-dist/js/popper.min.js' %}" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="{% static 'bootstrap-4.2.1-dist/js/bootstrap.min.js' %}" crossorigin="anonymous"></script>
     <script src="{% static 'js/login.js' %}"></script>
+    <!-- <script>
+      $(document).ready(function(){
+        var path = window.location.search
+        
+        // var name = path.split("=")
+        $(".nav-link").each(function(){
+          // if($(this).html()==name[1]){
+            $(".nav-link").removeClass("active")
+            $(this).addClass("active")
+          
+        })
+
+      }) -->
+      <!-- // $(document).ready(function(){
+      //     $(".nav-item").each(function(){
+      //         $(this).click(function(){
+      //           $(".nav-item").removeClass("active")
+      //           $(this).addClass("active")
+      //         })
+      //     })
+      // })
+    </script> -->
     {% block script %} {% endblock %}
   </body>
 </html>

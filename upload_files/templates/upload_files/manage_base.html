@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- {% block title %}文件管理{% endblock %} -->
+<div class="manage">
+<ul class="list-group list-group-flush bg-light">
+    <li class="list-group-item bg-light">
+        <span>标题</span><span>作者</span><span>创建时间</span><a class="last">操作</a></li>
+    {% for file in files %}
+    <li class="list-group-item "><span><a class="text-primary" href="{% url 'upload_files:showFile' file.pk %}">{{ file.title }}</a> </span> <span>{{ file.auth }}</span><span>{{ file.create_time }}</span> <a href="{% url 'upload_files:delete' file.pk %}" class="text-danger last" onClick="return confirm('确定删除?');">删除</a>
+    </li>
+    {% empty %}
+        暂无文件
+    {% endfor %}
+</ul>
+</div>
+{% endblock %}

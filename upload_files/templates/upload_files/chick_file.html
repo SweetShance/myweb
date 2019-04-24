@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} 文件审核 {% endblock %}
+{% block content %}
+<div class="list-group del-file">
+    <li class="list-group-item list-group-item-action active">
+        文件审核
+    </li>
+    {% for file in files %}
+    <li class="list-group-item list-group-item-action">
+       <span><a class="text-primary" href="{% url 'upload_files:showFile' file.pk %}">{{ file.title }}</a></span>  
+    </span> <span>{{ file.auth }}</span>
+    <span>{{ file.create_time }}</span> 
+    <a href="{% url 'upload_files:through' file.pk %}" class="yes last " onClick="return confirm('确定通过?');">通过</a> 
+    <a href="{% url 'upload_files:delete' file.pk %}" class="text-danger last" onclick="return confirm('确定驳回?');">驳回</a> </li>
+    {% empty %}
+        暂无内容
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

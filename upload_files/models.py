@@ -26,12 +26,14 @@ class UploadFiles(models.Model):
     fileLabel = models.ManyToManyField(FileLabel, through='Associated')
     create_time = models.DateField(default=timezone.now, )
     icon = models.ImageField(upload_to='files', blank=True)
+    is_active = models.SmallIntegerField(default=0)
     
     def __str__(self):
         return "<id: %s name: %s>" %(self.pk, self.title)
 
     class Meta:
         ordering = ['-create_time']    
+        
 
 def FileFieldDefault():
     return FileLabel.objects.all().first
